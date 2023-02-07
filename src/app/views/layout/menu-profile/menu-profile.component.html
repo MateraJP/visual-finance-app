@@ -1,0 +1,55 @@
+<div class="message-container">
+    <div class="header">
+        <label>Perfil</label>
+        <i class="btn-x fas fa-times" (click)="onClose()"></i>
+    </div>
+
+    <div class="main">
+        <div class="pic">
+			<img #profilePic class="picture"> 
+			<div class="picture piture-edit loading" (click)="onPictureEdit()" [ngClass]="{isLoading: profile.profilePicLoading}">
+				<i class="fas fa-spinner"></i>
+			</div>
+			<div class="picture piture-edit" (click)="onPictureEdit()">
+				<i class="far fa-edit"></i> 
+				<input #file type="file" style="display:none;" (change)="handleFileInput($event.target.files)" name="file" id="file" accept=".png,.jpeg">
+			</div>
+			<label class="name">{{profile.name}}</label>
+			<label class="name link">
+				{{profile.email}}
+				<i *ngIf="profile.isEmailValid" class="-success fa fa-check" [tooltip]="'email validado'"></i>
+				<i *ngIf="!profile.isEmailValid" class="-danger fa fa-times link" [tooltip]="'clique para validar email'"></i>
+			</label>
+		</div>
+		
+		<div class="colors">
+			<div class="name"><label>Temas</label></div>
+			<div class="color-options">
+				<div class="color" *ngFor="let item of colors" [tooltip]="item.name"
+					(click)="changeColor(item)">
+					<div class="color-pocket"  [style.backgroundColor]="item.color">
+						<span> </span>
+					</div>
+				</div>
+			</div>
+			<div class="color-options dark">
+				<div class="color" *ngFor="let item of colors" [tooltip]="item.name"
+					(click)="changeColor(item, true)">
+					<div class="color-pocket"  [style.backgroundColor]="item.color">
+						<span> </span>
+					</div>
+				</div>
+			</div>
+			<button class="btn btn-pill" (click)="resetColor()" [tooltip]="'retornar valor inicial'">Resetar Tema</button>
+		</div>
+		<div class="colors">
+			<div class="name"><label>Sessão</label></div>
+			<label class="detail">Inicio em: {{profile.sessionStart | date:'dd/MM/yyyy - HH:mm' }}</label>
+			<label class="detail">Valido até: {{profile.sessionValid | date:'dd/MM/yyyy - HH:mm' }}</label>
+			<div class="buttons">
+				<button class="btn btn-pill" (click)="onLogoff()" [tooltip]="'logoff'">Alterar Senha</button>
+				<button class="btn secundary btn-pill" (click)="onLogoff()" [tooltip]="'logoff'">Sair</button>
+			</div>
+		</div>
+    </div>
+</div>

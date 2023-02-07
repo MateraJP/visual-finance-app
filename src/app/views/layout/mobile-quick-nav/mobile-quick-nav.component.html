@@ -1,0 +1,9 @@
+<div class="quick-nav-container">
+	<div class="link" *ngFor="let route of menuNavService.getList()"
+		[ngClass]="{active: route.data.selected}"
+		(click)="onNavigate(route)"
+		>
+		<i [class]="route.data.icon"></i>
+		<!-- <label>{{route.data.title}}</label> -->
+	</div>
+</div>

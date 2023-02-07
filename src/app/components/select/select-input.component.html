@@ -1,0 +1,17 @@
+<div #fc class="form-control" [class.open]="isOpen">
+	<div>
+		<span>
+			{{getDisplayValue(selected)}}&nbsp;
+			<i *ngIf="selected && displayIcon" [class]="selected[displayIcon]"></i>
+			<!-- TODO: COLOR -->
+		</span>
+	</div>
+	<div class="control-actions" [class.selected]="selected" >
+		<i *ngIf="selected" (click)="clear()" class="clear fas fa-times"></i>
+
+		<div class="activator" (click)="toggle()">
+			<i *ngIf="isOpen" class="fas fa-times"></i> 
+			<i *ngIf="!isOpen" class="fas fa-chevron-down"></i>
+		</div>
+	</div>
+</div>

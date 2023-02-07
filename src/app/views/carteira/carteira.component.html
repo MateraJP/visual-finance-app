@@ -1,0 +1,51 @@
+<div class="header">
+	<h4>Carteiras</h4>
+</div>
+
+<div class="card-container" (scroll)="onScroll($event)">
+	<div class="card" 
+		[ngClass]="{press: item.press}"
+		*ngFor="let item of list; let i = index;" 
+		(mousedown)="item.press = true;" 
+		(mouseleave)="item.press = false;"
+		(touchstart)="item.press = true;" 
+		(touchcancel)="item.press = false;"  
+		(touchend)="onEdit(item.id);"  
+		(click)="onEdit(item.id);">
+
+		<div class="card-color" [style.backgroundColor]="item.cor">
+			<span></span>
+		</div>
+
+		<div class="card-content">
+			<div class="card-row">
+				<label>{{item.nome}}</label>
+				<span class="badge"
+				[class]="situacaoCarteira.getStyle(item.situacao)"
+				[tooltip]="item.situacao == 'Inativo' ? 'Não&nbspPermite&nbspLançamento' : ''"
+				tooltipPosition="left">
+					{{situacaoCarteira.getDescription(item.situacao)}}
+				</span>
+			</div>
+
+			<div class="card-row">
+				<label>{{tipoCarteira.getDescription(item.tipoCarteira)}}</label>
+			</div>
+
+			<div class="card-row card-actions">
+				<!-- 
+				<i *ngIf="item.situacao == 'Ativo'"  class="fas fa-lock-open" [tooltip]="'Bloquear novos lançamentos'"></i>
+				<i *ngIf="item.situacao == 'Inativo' || item.situacao == 'EmElaboracao'" class="fas fa-lock" [tooltip]="'Liberar para novos lançamentos'"></i>
+				-->
+				<i *ngIf="item.situacao == 'EmElaboracao'" class="fas fa-lock-open" (click)="ativar($event, i)" [tooltip]="'liberar para novos lançamentos'"></i>
+				<i class="fas fa-trash" (click)="remover($event, i)"></i>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="floating-plus">
+	<button class="btn primary" (click)="onNew()">
+		<i class="fa fa-plus"><label>&nbsp;Novo</label></i>
+	</button>
+</div>

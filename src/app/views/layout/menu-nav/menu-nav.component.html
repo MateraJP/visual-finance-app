@@ -1,0 +1,21 @@
+<div class="message-container">
+    <div class="items">
+        <div class="item" *ngFor="let route of menuNavService.getList()" 
+			[class.active]="route.data.selected"
+			[class.link]="!(route.children && route.children.length > 0)" 
+			(click)="onNavigate(route)">
+			<div class="menu-title">
+				<i [class]="route.data.icon"></i>&nbsp;
+				<label>{{route.data.title}}</label>
+			</div>
+			<div class="children" *ngIf="route.children && route.children.length > 0">
+				<div class="item link" *ngFor="let child of route.children" (click)="onNavigate(child)">
+					<div class="menu-title">
+						<i [class]="child.data.icon"></i>&nbsp;
+						<label>{{child.data.title}}</label>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>

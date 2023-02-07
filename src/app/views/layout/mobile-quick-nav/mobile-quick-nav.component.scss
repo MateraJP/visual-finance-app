@@ -1,0 +1,43 @@
+.quick-nav-container {
+    position: absolute;
+    left: 0px;
+    bottom: 0px; /*possivel elevação para cobrir barra de ação do celular*/
+
+	width: 70%;
+	height: var(--nav-height);
+    background-color: var(--primary);
+	border-radius: 0 50px 0 0;
+	padding-right: 50px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	align-items: center;
+
+	.link {
+		width: 25%; //4 links
+		height: 100%;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		// &:not(:last-child) {
+		// 	border-right: solid 1px rgba(0, 0, 0, 0.7);
+		// }
+
+		i {
+			color: var(--primary-text);
+			font-size: 17pt;
+		}
+
+		&.active {
+			background-color: var(--primary-highlight);
+			
+			i {
+				color: var(--primary-text-highlight);
+			}
+		}
+	}
+}

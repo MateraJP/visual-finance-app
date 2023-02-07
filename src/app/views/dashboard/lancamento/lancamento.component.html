@@ -1,0 +1,32 @@
+<div class="header">
+	
+</div>
+
+<div class="container">
+<form [formGroup]="form" (keydown.enter)="$event.preventDefault()">
+	<div class="form-group col-6">
+		<label class="form-label">Data Prevista</label>
+		<input type="datetime" formControlName="dataPrevisao" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dataPrevisao.errors }" />
+		<div *ngIf="submitted && f.dataPrevisao.errors" class="invalid-feedback">
+			<div *ngIf="f.dataPrevisao.errors.required">Data é obrigatória</div>
+		</div>
+	</div>
+	<div class="form-group col-6">
+		<label class="form-label">Data Prevista</label>
+		<input type="number" formControlName="valorPrevisao" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.valorPrevisao.errors }" />
+		<div *ngIf="submitted && f.valorPrevisao.errors" class="invalid-feedback">
+			<div *ngIf="f.valorPrevisao.errors.required">Valor é obrigatório</div>
+		</div>
+	</div>
+	
+	<div class="form-action">
+		<div class="form-btn">
+			<button [disabled]="loading" class="btn primary" (click)="onSubmit()">
+				<span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+				Salvar
+			</button>
+			<button class="btn secundary" (click)="goBack()">Cancelar</button>
+		</div>
+	</div>
+</form>
+</div>

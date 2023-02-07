@@ -1,0 +1,61 @@
+<div class="container">
+    <!-- HEADER -->
+    <div class="top-bar">
+        <div class="brand">
+            <img [src]="brandImage" alt="símbolo da marca">
+        </div>
+        <div class="title">
+            <h1>{{title}}</h1>
+        </div>
+
+        <div class="breadcrumb">
+
+        </div>
+		
+        <div class="message-menu submenu" (click)="toggleMenu('message')"
+            [ngClass]="{active: this.toggle == 'message'}">
+            <i class="fas fa-envelope"></i>
+        </div>
+
+        <div class="profile-menu submenu" (click)="toggleMenu('profile')"
+            [ngClass]="{active: this.toggle == 'profile'}">
+            <i class="fas fa-user"></i>
+        </div>
+
+        <div class="mobile-menu submenu" (click)="toggleMenu('mobile')" [ngClass]="{active: this.toggle == 'mobile'}">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- HIDDEN CONTAINERS -->
+        <div id="tooltip" class="tooltip-container">
+            <span id="tooltipVal"  class="tooltip-value"> aaaaa </span>
+            <div class="tooltip-arrow"></div>
+        </div>
+        <div class="container-hidden right mobile-menu" [slideOptions]="menuMobileService.SlideOptions">
+            <app-menu-mobile></app-menu-mobile>
+        </div>
+        <div class="container-hidden right" [slideOptions]="menuMessageService.SlideOptions">
+            <app-menu-message></app-menu-message>
+        </div>
+        <div class="container-hidden right" [slideOptions]="menuProfileService.SlideOptions">
+            <app-menu-profile></app-menu-profile>
+        </div> 
+        <div class="container-hidden left no-mobile-menu" [slideOptions]="menuNavService.SlideOptions">
+            <app-menu-nav></app-menu-nav>
+        </div> 
+        <div class="only-mobile-menu">
+            <app-mobile-quick-nav></app-mobile-quick-nav>
+        </div> 
+        <app-notification-board></app-notification-board>
+        <app-modal-board></app-modal-board>
+        <!-- CONTENT -->
+        <div class="content-div" (scroll)="scrollMe($event)">
+            <router-outlet></router-outlet>
+        </div>
+
+        <!-- FOOTER -->
+        <!-- <div></div> -->
+    </div>
+</div>

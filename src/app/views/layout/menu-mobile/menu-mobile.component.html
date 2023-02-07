@@ -1,0 +1,31 @@
+<div class="message-container">
+    <div class="items">
+        <div class="item" (click)="onNotificacao()">
+            Mensagens
+            <i class="btn-arrow fas fa-chevron-right"></i>
+        </div>
+        <div class="item" (click)="onProfile()">
+            Perfil
+            <i class="btn-arrow fas fa-chevron-right"></i>
+        </div>
+        
+        <div class="item" *ngFor="let route of menuNavService.getList()" [ngClass]="{link: !(route.children && route.children.length > 0)}" 
+			  [ngClass]="{active: route.data.selected}"
+			  (click)="onNavigate(route)">
+			<div class="menu-title">
+				<i [class]="route.data.icon"></i>&nbsp;
+				<label>{{route.data.title}}</label>
+			</div>
+			<div class="children" *ngIf="route.children && route.children.length > 0">
+				<div class="item link" *ngFor="let child of route.children" 
+				  [ngClass]="{active: child.data.selected}"
+				  (click)="onNavigate(child)">
+					<div class="menu-title">
+						<i [class]="child.data.icon"></i>&nbsp;
+						<label>{{child.data.title}}</label>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>

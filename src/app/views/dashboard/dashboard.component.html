@@ -1,0 +1,97 @@
+<!-- <div class="header">
+	<h4>Painel</h4>
+</div>
+
+<div class="charts">
+	<div class="chart-line">
+
+	</div>
+	<div class="chart-bar">
+		
+	</div>
+</div>
+
+<div class="grid-container">
+	<div class="grid-header">
+		b
+	</div>
+	<div class="grid-body">
+		<div class="grid-row">
+			a
+		</div>
+	</div>
+</div> -->
+
+
+<div class="tab-container"
+	[touchTrack]="'Horizontal'"
+	[touchTrackPrecision]="200"
+	[swapSubject]="swapAction"
+	[movementSubject]="moviment"
+	[finishSubject]="finish"
+	>
+
+	<!-- <div class="tab"
+		[style.transform]="transform">
+		<div class="tab-header">
+			<h4>Painel</h4>
+		</div>
+
+		<div class="tab-content">
+			<span></span>
+		</div>
+	</div> -->
+
+	<div class="tab" *ngFor="let tab of tabs; let i = index;"
+		[style.transform]="transform"
+		(scroll)="onScroll($event, i)">
+		<div class="tab-header">
+			<h4>{{tab.nome}}</h4>
+		</div>
+
+		<div class="tab-content">
+			<div class="card-container">
+				<div class="card" *ngFor="let item of tab.lancamentos; let l = index;" (click)="cardSelect($event, l)">
+			
+					<div class="card-content">
+						<div class="card-row"
+							[class.previsao]="!item.valorEfetivado">
+							<label>{{item.id}}</label>
+							<label *ngIf="item.dataEfetivado">{{item.dataEfetivado | date }}</label>
+							<label *ngIf="!item.dataEfetivado">{{item.dataPrevisao | date }}</label>
+						</div>
+			
+						<div class="card-row">
+							<label>{{item.descricao}}</label>
+						</div>
+			
+						<div class="card-row">
+							<span></span>
+							<strong *ngIf="item.valorEfetivado" 
+							  [class.positivo]="item.valorPrevisao > 0"
+							  [class.negativo]="item.valorPrevisao < 0">
+							  	{{item.valorEfetivado |  currency:'BRL' }}
+							</strong>
+							<strong *ngIf="!item.valorEfetivado" 
+							  [class.positivo]="item.valorPrevisao > 0"
+							  [class.negativo]="item.valorPrevisao < 0">
+							  	{{item.valorPrevisao |  currency:'BRL' }}
+							</strong>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="card-content">
+						<i class="spinner fas fa-spinner" [class.hidden]="!tab.loading"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="floating-plus">
+	<button class="btn primary" (click)="onNew($event)">
+		<i class="fa fa-plus"><label>&nbsp;Novo</label></i>
+	</button>
+</div>

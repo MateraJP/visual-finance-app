@@ -1,0 +1,42 @@
+<div class="header">
+	<h4>Períodos</h4>
+</div>
+
+<div class="card-container" (scroll)="onScroll($event)">
+	<div class="card" 
+		[ngClass]="{press: item.press}"
+		*ngFor="let item of list; let i = index;" 
+		(mousedown)="item.press = true;" 
+		(mouseleave)="item.press = false;"
+		(touchstart)="item.press = true;" 
+		(touchcancel)="item.press = false;"  
+		(touchend)="onEdit(item.id);"  
+		(click)="onEdit(item.id);">
+
+		<div class="card-color" [style.backgroundColor]="item.cor">
+			<span></span>
+		</div>
+
+		<div class="card-content">
+			<div class="card-row">
+				<label>{{item.codigo}}</label>
+				<span class="badge"
+				[class.-success]="item.situacao == 'Aberto'"
+				[class.-danger]="item.situacao == 'Fechado'"
+				[class.-info]="item.situacao == 'EmElaboracao'"
+				[tooltip]="item.situacao == 'Fechado' ? 'Não&nbspPermite&nbspLançamento' : ''">
+					{{item.situacao}}
+				</span>
+			</div>
+			<div class="card-row">
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="floating-plus">
+	<button class="btn primary" (click)="onNew()">
+		<i class="fa fa-plus"><label>&nbsp;Novo</label></i>
+	</button>
+</div>

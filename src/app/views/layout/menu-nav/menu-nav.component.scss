@@ -1,0 +1,53 @@
+.message-container {
+    width: 230px;
+    height: 100%;
+
+    color: var(--secundary-text);
+    background-color: var(--secundary);
+
+    
+
+    .items {
+        overflow: auto;
+        overflow-x: hidden;
+        height: 100%;
+    }
+
+    .item {
+        min-height: 60px; //expands with childrem
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+    	padding: 20px 0px 20px 20px;
+        box-shadow: black 7px 3px 13px -11px;
+
+		//TODO: \/
+        margin: 1.5px 0px;
+            color: var(--secundary-text);
+            background-color: var(--secundary);
+
+		&.link {
+			&:hover {
+				cursor:pointer !important;
+				filter: brightness(90%);
+			}
+		}
+
+		.menu-title {
+			margin-bottom: 5px;
+		}
+
+		.children {
+			.item {
+				width: 210px;
+				box-shadow: black -1px 3px 13px -11px;
+			}
+		}
+
+		&.active {
+			filter:brightness(80%);
+		}
+    }
+}
+
