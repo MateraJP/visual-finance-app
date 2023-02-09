@@ -45,9 +45,11 @@ export class SelectOptionsComponent implements OnInit, OnChanges {
 
 	private timeout : any;
 	onSearch(e: KeyboardEvent): void {
+		e.stopPropagation();
 		if (e.key == 'Enter' && this.currentOptions && this.currentOptions.length == 1) {
 			return this.onSelect(this.currentOptions[0]);
 		} else if (e.key == 'Escape') {
+			this.search.nativeElement.blur();
 			this.close();
 		}
 

@@ -4,6 +4,20 @@
 
 <div class="container">
 <form [formGroup]="form" (keydown.enter)="$event.preventDefault()">
+
+	<div class="form-group col-6">
+		<label class="form-label">Carteira</label>
+		<select-input
+			formControlName="carteiraId" 
+			[options]="carteiras" 
+			optionKey="id"
+			optionDisplay="nome"
+			></select-input>
+		<div *ngIf="submitted && f.carteiraId.errors" class="invalid-feedback">
+			<div *ngIf="f.carteiraId.errors.required">Obrigatório informar carteira</div>
+		</div>
+	</div>
+
 	<div class="form-group col-6">
 		<label class="form-label">Data Prevista</label>
 		<input type="datetime" formControlName="dataPrevisao" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dataPrevisao.errors }" />

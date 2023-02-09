@@ -4,7 +4,7 @@ import {
 	ViewContainerRef,
 	ComponentFactoryResolver,
 	Input,
-	SimpleChanges,
+	OnDestroy,
 	TemplateRef,
 	RendererFactory2,
 	Injector,
@@ -51,6 +51,12 @@ export class DialogComponent {
 			this.componentConfig._componentRef.instance.data = this.componentConfig.data;
 			(this.componentConfig._componentRef.instance as any)._closeSubject = this.closeSubject;
 		}
+
+		this.closeSubject.subscribe({
+			next: () => {
+				this.container.clear()
+			}
+		})
 	}
 
     onClose(): void {

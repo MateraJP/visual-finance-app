@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, ElementRef, forwardRef, HostBinding, Input, OnChanges, OnDestroy, OnInit, Optional, Self, SimpleChanges, ViewChild } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormGroup, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, Optional, Self, ViewChild } from '@angular/core';
+import { FormBuilder, NgControl } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { LayerService } from '../_shared/services/layer.service';
 import { CustomImputBase } from '../custom-input.base';
@@ -11,7 +11,7 @@ import { Layer } from '../_shared/models/layer';
   templateUrl: './select-input.component.html',
   styleUrls: ['./select-input.component.scss']
 })
-export class SelectInputComponent extends CustomImputBase implements OnDestroy {
+export class SelectOldInputComponent extends CustomImputBase implements OnDestroy {
 	static nextId = 0;
 	selected: any;
 	isOpen = false;
@@ -28,7 +28,7 @@ export class SelectInputComponent extends CustomImputBase implements OnDestroy {
 	@Input('canSearch') canSearch: boolean = true;
 	// @Input('optionsObservable') optionsObservable: Observable<any[]>; //non static
 
-	@HostBinding() id = `select-input-${SelectInputComponent.nextId++}`;
+	@HostBinding() id = `select-input-${SelectOldInputComponent.nextId++}`;
 
 	@ViewChild('fc') fc: ElementRef;
 
@@ -46,8 +46,8 @@ export class SelectInputComponent extends CustomImputBase implements OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		super.ngOnDestroy();
 		this.layer.destroySubject.next();
+		super.ngOnDestroy();
 	}
 
 	private subLoad: Subscription;

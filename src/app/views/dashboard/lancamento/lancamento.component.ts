@@ -22,6 +22,7 @@ export class LancamentoComponent extends DialogComponentBase implements OnInit {
 	form!: FormGroup;
 	loading = false;
 	submitted = false;
+	carteiras: Carteira[] = [];
 
 	situacaoCarteira = SituacaoCarteira;
 	tipoCarteira = TipoCarteira;
@@ -30,11 +31,18 @@ export class LancamentoComponent extends DialogComponentBase implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private resource: LancamentoResource,
+		private carteiraResource: CarteiraResource,
 		private notificationService: NotificationService,
 		private alertService: AlertService
 
 	) {
 		super();
+
+		this.carteiraResource.getAll().subscribe({
+			next: (res: Carteira[]) => {
+				this.carteiras = res;
+			}
+		})
 	}
 
 	ngOnInit(): void {
