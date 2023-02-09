@@ -1,13 +1,15 @@
 import { Component, DEFAULT_CURRENCY_CODE, LOCALE_ID, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { DialogService } from '../../components/dialog/services/dialog.service';
+import { DialogComponentConfig } from '../../components/dialog/models/dialog-component-config';
+import { DialogConfig } from '../../components/dialog/models/dialog-config';
 import { Cartesiano, Direction } from '../../components/touch-track/touch-track.directive';
 import { Carteira } from '../../models/carteira.model';
 import { SituacaoCarteira } from '../../models/enums/situacao-carteira.enum';
 import { TipoCarteira } from '../../models/enums/tipo-carteira.enum';
 import { Lancamento } from '../../models/lancamento.model';
 import { CarteiraResource } from '../../resources/carteira.resource';
-import { Modal, ModalService } from '../layout/modal-board/modal.service';
 import { LancamentoComponent } from './lancamento/lancamento.component';
 
 @Component({
@@ -38,7 +40,7 @@ export class DashboardComponent implements OnInit {
 	finish = new Subject<undefined>()
 
 	constructor(private resource: CarteiraResource,
-        private modalService: ModalService) { }
+		private dialogService: DialogService) { }
 
 	ngOnInit(): void {
 		this.resource.getAll().subscribe({
@@ -100,13 +102,14 @@ export class DashboardComponent implements OnInit {
 	}
 
     openModalComponent(carteira: Carteira, lancamento: Lancamento = undefined): void {
-        this.modalService.create(new Modal({
+		this.dialogService.showDialog(new DialogComponentConfig ({
+			titulo: 'Lançamento',
 			data: {
 				model: lancamento,
 				carteira: carteira
 			},
-            actions: []
-        }), LancamentoComponent)
+			component: LancamentoComponent	
+		}));
     } 
 
 	onScroll(e: any, index:number): void {

@@ -362,6 +362,7 @@ form {
     &.primary {
         color: var(--primary-text);
         background-color: var(--primary);
+		font-weight: 600;
     }
 
     &.secundary {
@@ -370,6 +371,7 @@ form {
         filter: brightness(90%);
 
         &:hover {
+			background-color: var(--secundary-highlight);
             filter: brightness(65%);
         }
     }

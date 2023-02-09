@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Layer } from '../../../services/layer.service';
+import { Layer } from '../../_shared/models/layer';
 
 @Component({
 	selector: 'app-select-options',
@@ -23,7 +23,7 @@ export class SelectOptionsComponent implements OnInit, OnChanges {
 	layer: Layer<SelectOptionsComponent>;
 	constructor() { }
 
-	ngOnInit(): void {
+	ngOnInit(): void {// TODO: passar para o change subject pois Layer pode estar nulo na execução do ngOnInit
 		this.layer.openSubject.subscribe({
 			next: () => {
 				if (this.canSearch) {
@@ -103,8 +103,4 @@ export class SelectOptionsComponent implements OnInit, OnChanges {
 			return option;
 		}
 	}	
-
-	onclick = (ev: MouseEvent) => {
-		ev.stopPropagation();
-	}
 }

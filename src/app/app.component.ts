@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LayerService } from './services/layer.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +8,5 @@ import { LayerService } from './services/layer.service';
 export class AppComponent {
   title = 'visual-financeiro-app';
 
-  constructor(render: LayerService) {}
+  constructor() {}
 }

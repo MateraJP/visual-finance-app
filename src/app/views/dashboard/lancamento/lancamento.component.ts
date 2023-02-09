@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { AlertService } from '../../../components/dialog/services/alert.service';
+import { DialogComponentBase } from '../../../components/dialog/models/dialog-component-base';
 import { Carteira } from '../../../models/carteira.model';
 import { SituacaoCarteira, SituacaoCarteiraEnum } from '../../../models/enums/situacao-carteira.enum';
 import { TipoCarteira } from '../../../models/enums/tipo-carteira.enum';
@@ -9,15 +11,13 @@ import { Lancamento } from '../../../models/lancamento.model';
 import { CarteiraResource } from '../../../resources/carteira.resource';
 import { LancamentoResource } from '../../../resources/lancamento.resource';
 import { NotificationService } from '../../../services/notification.service';
-import { ModalBaseComponent } from '../../layout/modal-board/modal-base.component';
-import { Modal } from '../../layout/modal-board/modal.service';
 
 @Component({
 	selector: 'app-lancamento',
 	templateUrl: './lancamento.component.html',
 	styleUrls: ['./lancamento.component.scss']
 })
-export class LancamentoComponent extends ModalBaseComponent implements OnInit {
+export class LancamentoComponent extends DialogComponentBase implements OnInit {
 	isInsert: boolean = true;
 	form!: FormGroup;
 	loading = false;
@@ -30,7 +30,8 @@ export class LancamentoComponent extends ModalBaseComponent implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private resource: LancamentoResource,
-		private notificationService: NotificationService
+		private notificationService: NotificationService,
+		private alertService: AlertService
 
 	) {
 		super();
@@ -48,7 +49,6 @@ export class LancamentoComponent extends ModalBaseComponent implements OnInit {
 				valorEfetivado: [this.data.valorEfetivado],
 			});
 		} else {
-			console.log('aqui');
 			this.form = new FormBuilder().group({
 				id: [0],
 				carteiraId: [this.data.carteira.id],
@@ -57,7 +57,6 @@ export class LancamentoComponent extends ModalBaseComponent implements OnInit {
 				valorPrevisao: [0, Validators.required],
 				valorEfetivado: [undefined],
 			});
-			console.log('aqui2 ', this.form.get('dataPrevisao').value);
 		}
 	}
 
@@ -102,6 +101,7 @@ export class LancamentoComponent extends ModalBaseComponent implements OnInit {
 
 	goBack(): void {
 		this.form.reset();
-		this.onClose();
+		//this.onClose();
+		this.closeSubject.next();
 	}
 }

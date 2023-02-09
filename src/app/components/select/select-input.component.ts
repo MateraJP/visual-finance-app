@@ -1,16 +1,17 @@
 import { ChangeDetectorRef, Component, ElementRef, forwardRef, HostBinding, Input, OnChanges, OnDestroy, OnInit, Optional, Self, SimpleChanges, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
-import { Layer, LayerService } from '../../services/layer.service';
+import { LayerService } from '../_shared/services/layer.service';
 import { CustomImputBase } from '../custom-input.base';
 import { SelectOptionsComponent } from './select-options/select-options.component';
+import { Layer } from '../_shared/models/layer';
 
 @Component({
   selector: 'select-input',
   templateUrl: './select-input.component.html',
   styleUrls: ['./select-input.component.scss']
 })
-export class SelectInputComponent extends CustomImputBase implements OnChanges {
+export class SelectInputComponent extends CustomImputBase implements OnDestroy {
 	static nextId = 0;
 	selected: any;
 	isOpen = false;
@@ -44,15 +45,17 @@ export class SelectInputComponent extends CustomImputBase implements OnChanges {
 		}
 	}
 
-	ngOnChanges(changes: SimpleChanges): void {
-		
+	ngOnDestroy(): void {
+		super.ngOnDestroy();
+		this.layer.destroySubject.next();
 	}
 
 	private subLoad: Subscription;
 	ngOnInit(): void {
 		//get layer on a global variable and use subjects to open and close component
-		this.layer = this.layerService.createHoverComponent(SelectOptionsComponent);
-		this.layer.closeOnBlur = true;
+		this.layer = this.layerService.createLayer(SelectOptionsComponent);
+		this.layer.backgroundBlur = 0;
+		this.layer.backgroundColor = '';
 		this.layer.closeSubject.subscribe({
 			next: () => { this.close() }
 		})
@@ -111,16 +114,16 @@ export class SelectInputComponent extends CustomImputBase implements OnChanges {
 	private open(): void {
 		this.isOpen = true;
 
-		this.layer.component.instance.key = this.key;
-		this.layer.component.instance.display = this.display;
-		this.layer.component.instance.displayIcon = this.displayIcon;
-		this.layer.component.instance.canSearch = this.canSearch;
-		this.layer.component.instance.options = this.options;
-		this.layer.component.instance.clientRect = this.fc.nativeElement.getBoundingClientRect();
-		this.layer.component.instance.close = (): void => {
+		this.layer._component.instance.key = this.key;
+		this.layer._component.instance.display = this.display;
+		this.layer._component.instance.displayIcon = this.displayIcon;
+		this.layer._component.instance.canSearch = this.canSearch;
+		this.layer._component.instance.options = this.options;
+		this.layer._component.instance.clientRect = this.fc.nativeElement.getBoundingClientRect();
+		this.layer._component.instance.close = (): void => {
 			this.layer.closeSubject.next();
 		}
-		this.layer.component.instance.onSelect = (selected: any): void => {
+		this.layer._component.instance.onSelect = (selected: any): void => {
 			this.onTouched(); // <-- mark as touched
 			this.selected = selected;
 	

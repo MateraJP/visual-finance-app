@@ -1,0 +1,21 @@
+<div class="modal">
+	<div class="modal-header">
+		<h4 *ngIf="config?.titulo">{{config.titulo}}</h4>
+		<h4 *ngIf="componentConfig?.titulo">{{componentConfig.titulo}}</h4>
+		<span></span>
+		<i class="btn-x fas fa-times" (click)="onClose()" *ngIf="config?.canClose"></i>
+		<i class="btn-x fas fa-times" (click)="onClose()" *ngIf="componentConfig?.canClose"></i>
+	</div>
+
+	<div class="modal-content" #modalContent>
+		<label *ngIf="config?.mensagem">{{config.mensagem}}</label>
+		<div *ngIf="config?.innerHtml" class="content" [innerHTML]="safeHtml"></div>
+		<ng-container #dialogContainer></ng-container>
+	</div>
+
+	<div class="modal-footer" *ngIf="config?.actions">
+		<button *ngFor="let action of config?.actions; let i = index;"
+			[class]="'btn ' + action.class"
+			(click)="callCallback(i)">{{action.texto}}</button>
+	</div>
+</div>
