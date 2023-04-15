@@ -11,14 +11,14 @@
 
 <div class="container">
 	<form [formGroup]="form" (keydown.enter)="$event.preventDefault()">
-		<div class="form-group col-6">
+		<div class="form-group col-3">
 			<label class="form-label">Nome</label>
 			<input type="text" formControlName="nome" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nome.errors }" />
 			<div *ngIf="submitted && f.nome.errors" class="invalid-feedback">
 				<div *ngIf="f.nome.errors.required">Nome para Carteira é obrigatório</div>
 			</div>
 		</div>
-		<div class="form-group col-6">
+		<div class="form-group col-3">
 			<label class="form-label">Tipo</label>
 			<select-input
 				formControlName="tipoCarteira" 
@@ -29,6 +29,14 @@
 				></select-input>
 			<div *ngIf="submitted && f.tipoCarteira.errors" class="invalid-feedback">
 				<div *ngIf="f.tipoCarteira.errors.required">Obrigatório informar tipo de carteira</div>
+			</div>
+		</div>
+		<div class="form-group col-3">
+			<label class="form-label">Data</label>
+			<select-date-input
+			formControlName="data" ></select-date-input>
+			<div *ngIf="submitted && f.data.errors" class="invalid-feedback">
+				<div *ngIf="f.data.errors.required">Obrigatório informar data</div>
 			</div>
 		</div>
 		<div class="form-action">

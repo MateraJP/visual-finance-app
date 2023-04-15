@@ -1,0 +1,17 @@
+<div class="container">
+	<!-- <i class="far fa-calendar-alt" style="width: 25px; height: 25px; display: flex; justify-content: center; align-items: center;" (click)="changeSelection($event)"></i> -->
+	<div class="header">
+		<i class="fas fa-chevron-left" (click)="turnLeft($event)"></i>
+		<span> {{currentPeriodos[0]}} - {{currentPeriodos[9]}} </span>
+		<i class="fas fa-chevron-right" (click)="turnRight($event)"></i>
+	</div>
+
+	<div class="content">
+		<div class="item" *ngFor="let item of currentPeriodos" (click)="onSelect($event, item)">{{item}}</div>
+	</div>
+<!-- 
+	<div class="footer">
+		<button class="btn light">Limpar</button>
+		<button class="btn light">Hoje</button>
+	</div> -->
+</div>

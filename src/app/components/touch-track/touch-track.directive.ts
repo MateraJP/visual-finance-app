@@ -48,7 +48,6 @@ export class TouchTrackDirective {
 		this.timeout = setTimeout(() => {
 			this.tracking = true;
 			this.touchStartAt = e.touches[0];
-			console.log(this.touchStartAt);
 		}, 150);
     }
 
@@ -60,8 +59,16 @@ export class TouchTrackDirective {
 
 		if (!this.tracking) {
 			return;
-		} 
+		}
 
+		if (!this.touchEndAt) {
+			if (this.finish)
+				this.finish.next();
+				
+			this.tracking = false;
+			return;
+		}
+		
 		let action = false;
 		if (this.touchTrack == TouchTrackType.Both || this.touchTrack == TouchTrackType.Horizontal) {
 			if (this.touchStartAt.clientX < (this.touchEndAt.clientX - this.precision)) {
@@ -103,7 +110,6 @@ export class TouchTrackDirective {
 			this.finish.next();
 		}
 
-        // console.log(this.touchEndAt);
 		this.tracking = false;
     }
 

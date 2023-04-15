@@ -52,3 +52,9 @@
 		}
 	}
 }
+
+.hidden {
+	position: absolute;
+	transform:scaleX(0);
+	filter:opacity(0)
+}

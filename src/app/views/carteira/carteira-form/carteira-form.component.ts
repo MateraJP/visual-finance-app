@@ -42,6 +42,7 @@ export class CarteiraFormComponent implements OnInit {
 			tipoCarteira: ['', Validators.required],
 			situacao: [SituacaoCarteiraEnum.EmElaboracao],
 			cor: ['#555555'],
+			data: [new Date()]
 		});
 		
 		this.route.params.subscribe({

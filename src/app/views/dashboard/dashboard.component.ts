@@ -93,7 +93,8 @@ export class DashboardComponent implements OnInit {
 
 	onNew(e: MouseEvent, ): void {
 		e.preventDefault();
-		this.openModalComponent(this.tabs[this.tabIndex]);
+		// this.openModalComponent(this.tabs[this.tabIndex]);
+		
 	}
 
 	cardSelect(e: MouseEvent, index: number): void {

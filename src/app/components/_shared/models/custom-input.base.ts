@@ -15,7 +15,6 @@ export abstract class CustomImputBase implements ControlValueAccessor, OnDestroy
 	protected _touched = false;
 	protected _focused = false;
 
-
 	@Input()
 	get placeholder() {
 		return this._placeholder;

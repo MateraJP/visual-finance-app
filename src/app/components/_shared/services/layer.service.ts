@@ -27,7 +27,9 @@ export class LayerService {
 
 	/** cria uma camada para apresentar um componente em primeiro plano */
 	public createLayer<T>(componentType: ComponentType<T>): Layer<T> {
-		let layer = this.newLayer<T>(componentType);
+		var layer = new Layer<T>(this.renderer);
+
+		layer._component = this.componentFactoryResolver.resolveComponentFactory(componentType).create(this.injector, [], layer._container);
         this.app.attachView(layer._component.hostView);
 
 		// TODO: Arrumar outra forma de passar o openSubject para o component instanciado
@@ -35,16 +37,6 @@ export class LayerService {
 		// END TODO;
 		
 
-		return layer;
-	}
-
-	private newLayer<T>(componentType: ComponentType<T>): Layer<T> {
-		var layer = new Layer<T>(this.renderer);
-
-		
-
-		// create component
-		layer._component = this.componentFactoryResolver.resolveComponentFactory(componentType).create(this.injector, [], layer._container);
 		return layer;
 	}
 }

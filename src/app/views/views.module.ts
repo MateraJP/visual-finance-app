@@ -23,6 +23,7 @@ import { MobileQuickNavComponent } from './layout/mobile-quick-nav/mobile-quick-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LancamentoComponent } from './dashboard/lancamento/lancamento.component';
 import { DialogModule } from '../components/dialog/dialog.module';
+import { SelectModule } from '../components/select/select.module';
 
 
 
@@ -34,7 +35,8 @@ import { DialogModule } from '../components/dialog/dialog.module';
 		ReactiveFormsModule,
 		ComponentsModule,
         AppRoutingModule,
-		DialogModule
+		DialogModule,
+		SelectModule
 	  ],
 	declarations: [
 		LoginComponent, 
@@ -44,14 +46,14 @@ import { DialogModule } from '../components/dialog/dialog.module';
 		MenuProfileComponent,
 		MenuMessageComponent,
 		MenuMobileComponent,
-		MenuNavComponent,
+		MenuNavComponent, 
 		NotificationBoardComponent,
 		CarteiraComponent,
 		CarteiraFormComponent, 
 		CriterioComponent,
 		CriterioFormComponent,
 		PeriodoComponent,
-		PeriodoFormComponent,
+		PeriodoFormComponent, 
 		MobileQuickNavComponent,
 		LancamentoComponent
 	],

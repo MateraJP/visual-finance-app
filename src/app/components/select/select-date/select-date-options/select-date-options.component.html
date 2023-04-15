@@ -1,0 +1,74 @@
+<div class="container" 
+	[class.isOpen]="isOpen"
+	[style.width.px]="clientRect.width -1"
+	[style.top.px]="clientRect.top + clientRect.height"
+	[style.left.px]="clientRect.left"
+	
+	[touchTrack]
+	[touchTrackPrecision]="200"
+	[swapSubject]="swapAction">
+
+	<div class="header" (click)="changeSelection($event)">
+		<i class="fas fa-chevron-left" (click)="makeTurn($event, Direction.Left)"></i>
+		<span [class.hidden]="currentSelectionType != 'Day'"> {{DateSettings.month(currentMonth)}} de {{currentYear}} </span>
+		<span [class.hidden]="currentSelectionType != 'Month'"> {{currentYear}} </span>
+		<span [class.hidden]="currentSelectionType != 'Year'"> {{rangeYear[0]?.ano}} - {{rangeYear[rangeYear.length-1]?.ano}} </span>
+		<i class="fas fa-chevron-right" (click)="makeTurn($event, Direction.Right)"></i>
+	</div>
+
+	<div class="box-container">
+		<div #box class="box">
+			<div *ngFor="let side of sides"
+				 class="side"
+				 [ngClass]="side.position">
+				
+				<div class="content">
+					
+					<div class="display anos" *ngIf="currentSelectionType == 'Year'">
+						<span class="option" 
+						      *ngFor="let date of rangeYear" 
+							  [class.today]="todayYear == date.ano" 
+							  [class.selected]="selectedYear == date.ano" 
+							  (click)="onSelect($event, date)">
+							{{date.ano}}
+						</span>
+					</div>
+	
+					<div class="display mes" *ngIf="currentSelectionType == 'Month'">
+						<span class="option" 
+						      *ngFor="let date of rangeMes" 
+							  [class.today]="todayYear == date.ano && todayMonth == date.mes" 
+							  [class.selected]="selectedYear == date.ano && selectedMonth == date.mes" 
+							  (click)="onSelect($event, date)">
+							{{DateSettings.month(date.mes).substring(0, 3)}}
+						</span>
+					</div>
+	
+					<div class="display dias" *ngIf="currentSelectionType == 'Day'">
+						<span *ngFor="let semana of rangeSemana">{{semana}}</span>
+						<span class="option" 
+						      *ngFor="let date of rangeDia" 
+							  [class.outmonth]="currentMonth != date.mes"
+							  [class.today]="todayYear == date.ano && todayMonth == date.mes && todayDay == date.dia" 
+							  [class.selected]="selectedYear == date.ano && selectedMonth == date.mes && selectedDay == date.dia" 
+							  (click)="onSelect($event, date)">
+							{{date.dia}}
+						</span>
+					</div>
+	
+					<div class="display hora" 
+						*ngIf="currentSelectionType == 'Time'">
+						<!-- <span (click)="onSelect($event)">times</span> -->
+					</div>
+
+					<div class="actions">
+						<span class="option" (click)="selectToday()">Hoje</span>
+						<span class="option" (click)="clear()">Limpar</span>
+					</div>
+				</div>
+			</div> 
+	
+	
+		</div>
+	</div>
+</div>

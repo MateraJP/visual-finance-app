@@ -78,6 +78,7 @@ export class Layer<T> {
 		// create container ( encapsulate component to prevent blur on interaction )
 		this._container = this._renderer.createElement('div');
 		this._renderer.setProperty(this._container, 'id', `floating-this-${this.id}`);
+		this._renderer.setStyle(this._container, 'margin', `auto`);
 		this._renderer.appendChild(this._backGround, this._container);
 		this._container.onclick = (ev: MouseEvent) => {
 			ev.preventDefault();
