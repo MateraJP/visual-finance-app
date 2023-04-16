@@ -1,12 +1,10 @@
 import { 
-    AfterViewInit,
     ChangeDetectorRef,
     Component,
     ElementRef,
     Input,
     OnInit,
-    ViewChild,
-    ViewChildren
+    ViewChild
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -20,7 +18,7 @@ import { DateModel, DateSettings } from '../date-settings';
     templateUrl: './select-date-options.component.html',
     styleUrls: ['./select-date-options.component.scss']
 })
-export class SelectDateOptionsComponent implements OnInit, AfterViewInit {
+export class SelectDateOptionsComponent implements OnInit {
     @ViewChild('box') box: ElementRef<HTMLDivElement>;
     @Input('clientRect') clientRect: DOMRect = new DOMRect();
     @Input('layer') layer: Layer<SelectDateOptionsComponent>
@@ -87,9 +85,6 @@ export class SelectDateOptionsComponent implements OnInit, AfterViewInit {
 			next: this.turn.bind(this)
 		})
         
-    } 
-    
-    ngAfterViewInit(): void {
         this.box.nativeElement.style.transition = 'transform 0.5s';
         var today = new Date();
 
@@ -120,7 +115,7 @@ export class SelectDateOptionsComponent implements OnInit, AfterViewInit {
 		// Inicializando Cubo
 		let front = new DateSide({type: this.currentSelectionType, position: 'front'})
         this.sides.push(front, front.left, front.right, front.top, front.bottom);
-    }
+    } 
 
     onSelect(e: MouseEvent, value: DateModel): void {
         e.preventDefault();

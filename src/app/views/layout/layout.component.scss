@@ -180,6 +180,7 @@
 
     @media (max-width: 768px) {
 		.only-mobile-menu {
+			z-index: 200;
 			display: flex;
 		}
     }

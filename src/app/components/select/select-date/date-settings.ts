@@ -170,4 +170,8 @@ export class DateModel {
 		this.dia = dia;
 		this.month = DateSettings.month(mes);
 	}
+
+	static fromDate(date: Date): DateModel{
+		return new DateModel(date.getFullYear(), date.getMonth(), date.getDate());
+	}
 }

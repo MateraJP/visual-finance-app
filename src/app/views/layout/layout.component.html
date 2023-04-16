@@ -45,14 +45,14 @@
         <div class="container-hidden left no-mobile-menu" [slideOptions]="menuNavService.SlideOptions">
             <app-menu-nav></app-menu-nav>
         </div> 
-        <div class="only-mobile-menu">
-            <app-mobile-quick-nav></app-mobile-quick-nav>
-        </div> 
         <app-notification-board></app-notification-board>
         <!-- CONTENT -->
         <div class="content-div" (scroll)="scrollMe($event)">
             <router-outlet></router-outlet>
         </div>
+        <div class="only-mobile-menu">
+            <app-mobile-quick-nav></app-mobile-quick-nav>
+        </div> 
 
         <!-- FOOTER -->
         <!-- <div></div> -->

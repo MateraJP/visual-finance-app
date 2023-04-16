@@ -41,10 +41,10 @@ export class CarteiraFormComponent implements OnInit {
 			nome: ['', Validators.required],
 			tipoCarteira: ['', Validators.required],
 			situacao: [SituacaoCarteiraEnum.EmElaboracao],
-			cor: ['#555555'],
+			cor: ['#555555'], 
 			data: [new Date()]
 		});
-		
+
 		this.route.params.subscribe({
 			next: (params: Params) => {
 				if (params['id'] && params['id'].length > 0) {
@@ -62,6 +62,7 @@ export class CarteiraFormComponent implements OnInit {
 				this.record = model;
 				this.title = this.record.nome;
 				this.form.patchValue(this.record);
+				console.log(this.form.getRawValue());
 			},
 			error: (err) => {
 				console.error(err);

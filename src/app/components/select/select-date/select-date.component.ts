@@ -1,5 +1,4 @@
 import { 
-    ChangeDetectorRef,
     Component,
     ElementRef,
     HostBinding,
@@ -9,7 +8,7 @@ import {
     Self,
 	ViewChild
 } from '@angular/core';
-import { FormBuilder, NgControl } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 
 import { CustomImputBase } from '../../_shared/models/custom-input.base';
 import { Layer } from '../../_shared/models/layer';
@@ -39,9 +38,7 @@ export class SelectDateComponent extends CustomImputBase implements OnDestroy {
 
     constructor(
         @Optional() @Self() public ngControl: NgControl,
-        private changeDetection: ChangeDetectorRef,
-        private layerService: LayerService,
-        fb: FormBuilder) { 
+        layerService: LayerService) { 
             super();
             
         // Setting the value accessor to avoid running into a circular import.
@@ -80,6 +77,21 @@ export class SelectDateComponent extends CustomImputBase implements OnDestroy {
 			}
 		})
     }
+
+	ngOnInit(): void {
+		let loaded = false;
+		if (this.ngControl != null) {
+			this.ngControl.valueChanges.subscribe({
+				next: (t) => {
+					if (!loaded) {
+						loaded = true;
+						if (t)
+							this.selectSubject.next(DateModel.fromDate(t))
+					}
+				}
+			})
+		}
+	}
 
     ngOnDestroy(): void {
         super.ngOnDestroy();
@@ -163,38 +175,6 @@ export class SelectDateComponent extends CustomImputBase implements OnDestroy {
     private open(): void {
     	this.isOpen = true;
         this.layer._component.instance.clientRect = this.fc.nativeElement.getBoundingClientRect();
-
-    // 	this.layer._component.instance.key = this.key;
-    // 	this.layer._component.instance.display = this.display;
-    // 	this.layer._component.instance.displayIcon = this.displayIcon;
-    // 	this.layer._component.instance.canSearch = this.canSearch;
-    // 	this.layer._component.instance.options = this.options;
-    // 	this.layer._component.instance.clientRect = this.fc.nativeElement.getBoundingClientRect();
-    // 	this.layer._component.instance.close = (): void => {
-    // 		this.layer.closeSubject.next();
-    // 	}
-    // 	this.layer._component.instance.onSelect = (selected: any): void => {
-    // 		this.onTouched(); // <-- mark as touched
-    // 		this.selected = selected;
-    
-    // 		// PARA RECEBER O OBJETO TODO, O BACK DEVE ESTAR PREPARADO PARA RECEBER
-    // 		if (this.ngControl && this.key) {
-    //          this.ngControl.control.setValue(selected[this.key]);
-    //      } else if (this.ngControl) {
-    //      	this.ngControl.control.setValue(selected);
-    //      }
-            
-    // 		if (this.onChangeSubject) {
-    // 			this.onChangeSubject.next(selected);
-    // 		}
-    
-    // 		this.layer.closeSubject.next();
-    // 	}
-        
-
-
-    // 	;
-    // 	this.layer.openSubject.next();
     }
 
     private close(): void {

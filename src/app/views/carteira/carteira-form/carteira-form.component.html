@@ -18,6 +18,7 @@
 				<div *ngIf="f.nome.errors.required">Nome para Carteira é obrigatório</div>
 			</div>
 		</div>
+
 		<div class="form-group col-3">
 			<label class="form-label">Tipo</label>
 			<select-input
@@ -31,6 +32,7 @@
 				<div *ngIf="f.tipoCarteira.errors.required">Obrigatório informar tipo de carteira</div>
 			</div>
 		</div>
+		
 		<div class="form-group col-3">
 			<label class="form-label">Data</label>
 			<select-date-input
@@ -39,6 +41,17 @@
 				<div *ngIf="f.data.errors.required">Obrigatório informar data</div>
 			</div>
 		</div>
+
+		<div class="form-group col-3">
+			<label class="form-label">Cor</label>
+			<select-color-input
+				formControlName="cor">
+			</select-color-input>
+			<div *ngIf="submitted && f.cor.errors" class="invalid-feedback">
+				<div *ngIf="f.cor.errors.required">Obrigatório informar cor</div>
+			</div>
+		</div>
+		
 		<div class="form-action">
 			<div class="form-btn">
 				<button [disabled]="loading" class="btn primary" (click)="onSubmit()">

@@ -8,6 +8,8 @@ import { OptionDayComponent } from './select-date/option-day/option-day.componen
 import { OptionMonthComponent } from './select-date/option-month/option-month.component';
 import { OptionTimeComponent } from './select-date/option-time/option-time.component';
 import { MaskDirective } from '../mask/mask.directive';
+import { SelectColorComponent } from './select-color/select-color.component';
+import { OptionPalletComponent } from './select-color/option-pallet/option-pallet.component';
 
 @NgModule({
 	imports: [
@@ -21,12 +23,16 @@ import { MaskDirective } from '../mask/mask.directive';
 		OptionYearComponent,
 		OptionDayComponent,
 		OptionMonthComponent,
-		OptionTimeComponent
+		OptionTimeComponent,
+		SelectColorComponent,
+		OptionPalletComponent
 	],
 	exports: [
 		MaskDirective,
 		SelectDateComponent,
-		SelectDateOptionsComponent
+		SelectDateOptionsComponent, 
+		SelectColorComponent,
+		OptionPalletComponent,
 	],
 	providers: []
 })

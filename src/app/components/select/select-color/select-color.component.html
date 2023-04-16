@@ -1,0 +1,15 @@
+<div #fc class="form-control" [class.open]="isOpen"
+	[style.borderColor]="selected?.darker"
+	[style.backgroundColor]="selected?.hex">
+	<div>
+		<span *ngIf="selected"></span>
+	</div>
+	<div class="control-actions" [class.selected]="selected" >
+		<i *ngIf="selected" (click)="clear()" class="clear fas fa-times"></i>
+
+		<div class="activator" (click)="toggle()">
+			<i *ngIf="isOpen" class="fas fa-times"></i> 
+			<i *ngIf="!isOpen" class="fas fa-chevron-down"></i>
+		</div>
+	</div>
+</div>

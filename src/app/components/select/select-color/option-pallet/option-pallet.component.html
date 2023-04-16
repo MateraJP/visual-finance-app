@@ -1,0 +1,21 @@
+<div class="pallet-main-container"
+	[class.isOpen]="isOpen"
+	[style.top.px]="clientRect.top + clientRect.height"
+	[style.left.px]="clientRect.left">
+
+    <div class="pallet-list" *ngFor="let colors of ColorPallet.colors" >
+        <div
+            class="pallet" *ngFor="let color of colors"
+            [tooltip]="color.label + ' (' + color.hex + ')'"
+            [style.borderColor]="color.darker"
+            [style.backgroundColor]="color.hex"
+            [ngClass]="{selected: color.hex == selectedHEX}"
+            (click)="onSelect($event, color)">
+            <div
+                [ngClass]="{selected: color.hex == selectedHEX}"
+                [style.borderColor]="color.darker">
+                <span>&nbsp;</span>
+            </div> 
+        </div>
+    </div>
+</div>
