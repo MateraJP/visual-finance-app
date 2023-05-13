@@ -2,23 +2,38 @@ import { Injectable } from '@angular/core';
 import { ColorPallet } from '../models/color-pallet.model';
 import { UserPreferencesModel } from '../models/user-preferences.model';
 import { PreferenceStorage } from '../resources/preference.storage';
+import { SecurityStorage } from '../resources/security.storage';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserPreferencesService {
+	private userID: string;
     get Colors(): ColorPallet[] {
         return this.colors;
     }
 
-    constructor(private storage: PreferenceStorage) {
-        const userPreferences = this.storage.get<UserPreferencesModel>('colors');
-        if (userPreferences)
-            this.changeColor(userPreferences);
+    constructor(
+		private storage: PreferenceStorage,
+		private security: SecurityStorage) {
+
+		setTimeout(this.reload.bind(this), 100);
      }
 
+	 reload(): void {
+
+		let user = this.security.getUserInfo();
+		if (!user) return;
+
+		this.userID = user.id;
+		
+		const userPreferences = this.storage.get<UserPreferencesModel>(`${this.userID}-colors`);
+		if (userPreferences)
+			this.changeColor(userPreferences);
+	 }
+
     changeColor(userPreferences: UserPreferencesModel): void {
-        this.storage.save('colors', userPreferences);
+        this.storage.save(`${this.userID}-colors`, userPreferences);
         document.documentElement.style.setProperty('--primary', `var(${userPreferences.colorPrimary})`);
         document.documentElement.style.setProperty('--primary-text', `var(${userPreferences.colorPrimaryText})`);
         document.documentElement.style.setProperty('--primary-item', `var(${userPreferences.colorPrimaryItem})`);

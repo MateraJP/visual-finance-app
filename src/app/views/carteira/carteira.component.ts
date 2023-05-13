@@ -40,8 +40,8 @@ export class CarteiraComponent implements OnInit {
 		}, 2500);
 	};
 
-	onEdit(id: number): void {
-		this.router.navigate([`carteira/${id}`])
+	onEdit(item: any): void {
+		this.router.navigate([`carteira/${item.id}`])
 	}
 
 	onNew(): void {

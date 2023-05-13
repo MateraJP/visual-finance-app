@@ -279,7 +279,8 @@ form {
 		font-size: 14px;
 		line-height: 18px;
 		margin: 0;
-		color: rgba(0, 0, 0, 0.87);
+		//color: rgba(0, 0, 0, 0.87);
+		color:var(--secundary-text);
 		font-weight: 600;
 	}
 
@@ -381,6 +382,40 @@ form {
     }
 }
 
+///////////////////////////////////////////////////////////////////////
+///                            TOOLBAR                              ///
+///////////////////////////////////////////////////////////////////////
+	
+.toolbar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 10px;
+	align-items: center;
+	width: 70%;
+
+	@media (max-width: 768px) {
+		display: none;
+	} 
+}
+
+///////////////////////////////////////////////////////////////////////
+///                         TOOLBAR MOBILE                          ///
+///////////////////////////////////////////////////////////////////////
+
+.toolbar-mobile {
+	display: none;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 80%;
+	position: absolute;
+	bottom: 90px;
+
+	@media (max-width: 768px) {
+		display: flex;
+	} 
+}
 
 ///////////////////////////////////////////////////////////////////////
 ///                             ICONS                               ///

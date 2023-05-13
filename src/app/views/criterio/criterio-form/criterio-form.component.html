@@ -1,1 +1,72 @@
-<p>criterio-form works!</p>
+<div class="header">
+	<h4>{{title}}
+		<toggle-switch-input
+			[uncheckedIcon]="'far fa-eye-slash'" 
+			[checkedIcon]="'fas fa-eye'"
+			[tooltip]="'oculta critério para novos lançamentos'"
+			[tooltipPosition]="'right'">
+		</toggle-switch-input>
+	</h4>
+	
+	<div class="toolbar">
+		<div style="flex: 1;"><span></span></div>
+		<action-btn [size]="btnNovo.size" [type]="btnNovo.type" [label]="btnNovo.label" [callback]="btnNovo.callback"></action-btn> 
+		<action-btn [size]="btnSalvar.size" [type]="btnSalvar.type" [label]="btnSalvar.label" [observable]="btnSalvar.observable"></action-btn> 
+		<action-btn [size]="btnExcluir.size" [type]="btnExcluir.type" [label]="btnExcluir.label" [observable]="btnExcluir.observable"></action-btn> 
+		<action-btn [size]="btnVoltar.size" [type]="btnVoltar.type" [label]="btnVoltar.label" [callback]="btnVoltar.callback"></action-btn> 
+	</div>
+</div>
+
+<div class="container">
+<form [formGroup]="form" (keydown.enter)="$event.preventDefault()">
+	<div class="form-group col-12">
+		<label class="form-label">Código</label>
+		<input type="text" formControlName="codigo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.codigo.errors }" />
+		<div *ngIf="submitted && f.codigo.errors" class="invalid-feedback">
+			<div *ngIf="f.codigo.errors.required">Código para Critério é obrigatório</div>
+		</div>
+	</div>
+	<div class="form-group col-12">
+		<label class="form-label">Descrição</label>
+		<input type="text" formControlName="descricao" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.descricao.errors }" />
+		<div *ngIf="submitted && f.descricao.errors" class="invalid-feedback">
+			<div *ngIf="f.descricao.errors.required">Descrição para Critério é obrigatório</div>
+		</div>
+	</div>
+
+	<div class="form-group col-12">
+		<label class="form-label">Cor</label>
+		<select-color-input
+			formControlName="cor">
+		</select-color-input>
+		<div *ngIf="submitted && f.cor.errors" class="invalid-feedback">
+			<div *ngIf="f.cor.errors.required">Obrigatório informar cor</div>
+		</div>
+	</div>
+
+	<div class="form-group col-12">
+		<label class="form-label">Situação</label>
+		<select-input
+			formControlName="situacao" 
+			[options]="situacaoCriterio.getList()" 
+			[canSearch]="false"
+			optionKey="key"
+			optionDisplay="value"
+			></select-input>
+		<div *ngIf="submitted && f.tipoCarteira.errors" class="invalid-feedback">
+			<div *ngIf="f.situacao.errors.required">Obrigatório informar situação</div>
+		</div>
+	</div>
+
+	<div class="form-group col-12">
+		
+	</div>
+</form>
+
+<div class="toolbar-mobile">
+	<action-btn [size]="'large'" [type]="btnExcluir.type" [rightIcon]="btnExcluir.rightIcon" [observable]="btnExcluir.observable"></action-btn> 
+	<action-btn [size]="'large'" [type]="btnNovo.type" [rightIcon]="btnNovo.rightIcon" [callback]="btnNovo.callback"></action-btn> 
+	<action-btn [size]="'large'" [type]="btnSalvar.type" [rightIcon]="btnSalvar.rightIcon" [observable]="btnSalvar.observable"></action-btn> 
+	<action-btn [size]="'large'" [type]="btnVoltar.type" [rightIcon]="btnVoltar.rightIcon" [callback]="btnVoltar.callback"></action-btn> 
+</div>
+</div>

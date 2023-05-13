@@ -1,0 +1,10 @@
+<div class="toggle">
+	<div #fc class="toggle-bar" [class.checked]="!!value" (click)="toggle($event)">
+		<span class="toggle-btn">
+			<i [class]="uncheckedIcon"  *ngIf="uncheckedIcon && !value"></i>
+			<i [class]="checkedIcon" *ngIf="checkedIcon && value"></i>
+		</span>
+	</div>
+	<label class="toggle-label" [class.small]="labelsmall" *ngIf="uncheckedLabel && !value">{{uncheckedLabel}}</label>
+	<label class="toggle-label" [class.small]="labelsmall" *ngIf="checkedLabel && value">{{checkedLabel}}</label>
+</div>

@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SlideDirective } from './side-nav/side-nav.directive';
 import { TooltipDirective } from './tooltip/tooltip.directive';
 import { SelectOldInputComponent } from './select-old/select-input.component';
 import { SelectOptionsComponent } from './select-old/select-options/select-options.component';
 import { TouchTrackDirective } from './touch-track/touch-track.directive';
+import { ActionBtnComponent } from './action-btn/action-btn.component';
+import { ActionToolbarComponent } from './action-toolbar/action-toolbar.component';
+import { SlideDirective } from './side-nav/side-nav.directive';
+import { ToggleSwitchComponent } from './toggle-switch/toggle-switch.component';
 //import { TooltipDirective } from './tooltip/tooltip.directive';
 //import { ShartPieComponent } from './chart-pie/chart-pie.component';
 //import { DragDropDirective } from './drag&drop/drag-drop.directive';
@@ -21,6 +24,9 @@ import { TouchTrackDirective } from './touch-track/touch-track.directive';
 		TouchTrackDirective,
         SelectOldInputComponent,
 		SelectOptionsComponent,
+		ActionBtnComponent,
+		ActionToolbarComponent,
+		ToggleSwitchComponent,
         // ShartPieComponent,
         // DragDropDirective,
         // DatepickerComponent,
@@ -34,6 +40,8 @@ import { TouchTrackDirective } from './touch-track/touch-track.directive';
         TooltipDirective,
 		TouchTrackDirective,
         SelectOldInputComponent,
+		ActionBtnComponent,
+		ToggleSwitchComponent,
         // ShartPieComponent,
         // DragDropDirective,
         // DatepickerComponent,

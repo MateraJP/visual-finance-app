@@ -1,0 +1,13 @@
+<div 
+   [style]="style"
+   [class]="'action-btn ' + type + ' ' + size" 
+   [class.loading]="isLoading"
+   [class.iconOnly]="(leftIcon || rightIcon) && (!label)"
+   (click)="execute($event)">
+	<i *ngIf="leftIcon" [class]="leftIcon"></i>
+	<span *ngIf="leftIcon && label">&nbsp;</span>
+	<span [style]="labelStyle" class="btn-label">{{label}}</span>
+	<span *ngIf="rightIcon && label">&nbsp;</span>
+	<i *ngIf="rightIcon" [class]="rightIcon"></i>
+	<div class="dot-flashing"></div>
+</div>

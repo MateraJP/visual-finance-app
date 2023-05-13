@@ -46,14 +46,13 @@
 		border-radius: 5px;
 		box-shadow: black 1px 2px 21px -8px;
 		transition: background-color 0.2s ease-in-out;
-		&:hover {
-			cursor:pointer;
-			background-color: var(--secundary-highlight);
-		}
-
-		&.press {
-			box-shadow: inset black -1px 2px 20px -10px;
-		}
+		
+		@media (pointer: fine) {
+			&:hover {
+				cursor:pointer;
+				background-color: var(--secundary-highlight);
+			}
+		  }
 
 		.card-color {
 			width: 10px;
@@ -103,6 +102,10 @@
 
 		}
 	}
+
+    @media (max-width: 768px) {
+		padding-bottom: 90px;
+    } 
 }
 
 .floating-plus {

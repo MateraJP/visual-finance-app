@@ -62,11 +62,20 @@ export class TooltipDirective implements OnChanges {
         this.currentVal = this.tooltipValue;
         this.isOpen = true;
 
+		if (window.innerWidth < 760) {
+			setTimeout(() => {
+				this.removeTooltip();
+			}, 4000);
+		}
+
         setTimeout(() => {
             this.container = document.getElementById('tooltip');
 
+			if ((!e) || (!this.container)) return;
             if (e.x + (this.tooltipValue.length * 10) > window.innerWidth && this.tooltipPosition != PositionEnum.Left) {
-                this.container.style.left = `${e.x - (this.tooltipValue.length * 10)}px`;
+				this.container.style.lineBreak = 'auto';
+				this.container.style.maxWidth = (window.innerWidth - 40) + 'px';
+                this.container.style.left = `${e.x + 10}px`;
             }
             else {
                 this.container.style.left = `${e.x + 10}px`;
@@ -96,12 +105,13 @@ export class TooltipDirective implements OnChanges {
     private removeTooltip(): void {
         if (!this.isOpen) return;
 
-        this.isOpen = false;
-        this.container = document.getElementById('tooltip');
+		if (!this.container) return;
         this.container.style.opacity = 0;
         setTimeout(() => {
+			this.isOpen = false;
+        	this.container = document.getElementById('tooltip');
             if (!this.isOpen)
                 this.container.style.transform = `translateX(${window.innerWidth}px)`;
-        });
+        }, 200);
     }
 }

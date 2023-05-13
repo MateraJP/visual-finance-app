@@ -12,6 +12,7 @@ import { UserInfoModel } from "../models/user-info.model";
 import { SecurityStorage } from "../resources/security.storage";
 import { NotificationService } from "./notification.service";
 import { RequestService } from "./request.service";
+import { UserPreferencesService } from "./user-preferences.service";
 
 @Injectable()
 export class AuthService  {
@@ -26,7 +27,8 @@ export class AuthService  {
 		private httpClient: HttpClient,
         private requestService: RequestService,
         private securityStorage: SecurityStorage,
-		private notificationService: NotificationService
+		private notificationService: NotificationService,
+		private userPreferencesService: UserPreferencesService
     ) {
     }
 
@@ -79,11 +81,11 @@ export class AuthService  {
                     tokenResponse.valid_until = validUntil;
 
                     this.securityStorage.saveUserToken(tokenResponse);
-
 					this.loadUserInfo()
 						.subscribe({
 							next: (data: UserInfoModel) => {
 								this.securityStorage.saveUserInfo(data);
+								this.userPreferencesService.reload();
 								this.redirectAfterLogin();
 							}
 						});

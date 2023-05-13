@@ -26,8 +26,8 @@ export class SelectOptionsComponent implements OnInit, OnChanges {
 	ngOnInit(): void {// TODO: passar para o change subject pois Layer pode estar nulo na execução do ngOnInit
 		this.layer.openSubject.subscribe({
 			next: () => {
+				this.currentOptions = this.options;
 				if (this.canSearch) {
-					this.currentOptions = this.options;
 					this.search.nativeElement.focus();
 				}
 			}

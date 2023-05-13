@@ -1,0 +1,148 @@
+
+.action-btn  {
+    border-radius: 8px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	transition: all 100ms ease-in-out;
+
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 12pt;
+
+	/** Size **/
+	
+	&.unset {
+		height: fit-content;
+		padding: 10px 10px;
+	}
+	
+	&.small {
+		height: 28px;
+		min-width: 96px;
+		font-size: 10pt;
+	}
+
+	&.default {
+		height: 35px;
+		min-width: 115px;
+		font-size: 12pt;
+	}
+
+	&.large {
+		height: 42px;
+		min-width: 130px;
+		font-size: 16pt;
+	}
+
+	&.iconOnly {
+		min-width: unset;
+		aspect-ratio: 1;
+		padding: unset;
+	}
+	
+	/** Color Schema **/
+
+	&.primary {
+		background-color: var(--primary);	
+		color: rgba(250,250,250,1);			
+	}
+
+	&.secondary {
+		background-color: var(--color-default-grey);		
+		color: rgba(25,25,25,1);			
+	}
+
+	&.success {
+		background-color: var(--color-green-dark-1);		
+		color: rgba(250,250,250,1);			
+	}
+
+	&.info {
+		background-color: var(--color-blue-dark-1);		
+		color: rgba(250,250,250,1);			
+	}
+
+	&.warn {
+		background-color: var(--color-yellow-dark-1);		
+		color: rgba(250,250,250,1);			
+	}
+
+	&.danger {
+		background-color: var(--color-red-dark-1);		
+		color: rgba(250,250,250,1);			
+	}
+
+	&:hover, span:hover  {
+		filter:brightness(85%);
+		cursor: pointer;
+	}
+
+	&:active {
+		filter:brightness(65%);
+	}
+
+	&.loading {
+		filter:brightness(85%);
+
+		&:hover, span:hover {
+			cursor: progress;
+		}
+
+		.btn-label {
+			filter:blur(2px);
+		}
+
+		/**
+		* ==============================================
+		* Dot Flashing (Zongbin at https://codepen.io/nzbin)
+		* ==============================================
+		*/
+		.dot-flashing {
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			border-radius: 5px;
+			background-color: #fefefe;
+			color: #fefefe;
+			animation: dot-flashing 400ms infinite linear alternate;
+			animation-delay: 200ms;
+		}
+		.dot-flashing::before, .dot-flashing::after {
+			content: "";
+			display: inline-block;
+			position: absolute;
+			top: 0;
+		}
+		.dot-flashing::before {
+			left: -15px;
+			width: 10px;
+			height: 10px;
+			border-radius: 5px;
+			background-color: #fefefe;
+			color: #fefefe;
+			animation: dot-flashing 400ms infinite alternate;
+			animation-delay: 0ms;
+		}
+		.dot-flashing::after {
+			left: 15px;
+			width: 10px;
+			height: 10px;
+			border-radius: 5px;
+			background-color: #fefefe;
+			color: #fefefe;
+			animation: dot-flashing 400ms infinite alternate;
+			animation-delay: 400ms;
+		}
+		
+		@keyframes dot-flashing {
+			0% {
+			background-color: #fefefe;
+			}
+			50%, 100% {
+			background-color: #fefefe33;
+			}
+		}
+	}
+}

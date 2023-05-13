@@ -13,15 +13,6 @@
 	align-items: center;
 
 	box-shadow: black 7px 3px 13px -11px;
-
-	.badge {
-		font-size: 14pt;
-		border-radius: 5px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 8px 20px;
-	}
 }
 
 
@@ -47,77 +38,20 @@
 	overflow-y: auto;
     max-height: calc(100% - 80px - 20px - 20px);
 
-	.card {
+	form {
+		max-width: 400px;
 		display: flex;
-		min-height: 100px;
-		width: 100%;
-		font-size: 14pt;
-		border-radius: 5px;
-		box-shadow: black 1px 2px 21px -8px;
-		transition: filter 0.2s ease-in-out;
-		&:hover {
-			cursor:pointer;
-			filter: brightness(70%);
-		}
-
-		&.press {
-			box-shadow: inset black -1px 2px 20px -10px;
-		}
-
-		.card-color {
-			width: 10px;
-			position: relative;
-			left: 0;
-			top: 0;
-			border-radius: 5px 0px 0px 5px;
-		}
-
-		.card-content {
-			padding: 20px;
-			width: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: flex-start;
-			align-items: flex-start;
-	
-			.card-row {
-				width: 100%;
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
-				align-items: center;
-
-				label {
-					font-size: 11pt;
-				}
-			}
-
-		}
-	}
-}
-
-
-
-.form-action {
-	width: 100%;
-	margin-top: 25px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	.form-btn {
-		width: 100%;
-		display: flex;
+		flex-direction: column;
 		justify-content: center;
-		align-items: center;
-	}
-	
-	.link {
-		margin-top: 10px;
-		text-decoration: underline;
 
-		&:hover {
-			cursor:pointer;
+		#dataForm {
+			transition: all 200ms ease-in;
+		}
+		.hideData {
+			height: 0px;
+			transform:scaleY(0);
+			padding:0;
+			margin:0;
 		}
 	}
 }

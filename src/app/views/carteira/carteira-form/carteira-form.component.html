@@ -1,17 +1,17 @@
 <div class="header">
 		<h4>{{title}}&nbsp;<i [class]="tipoCarteira.getIcon(record.tipoCarteira)" [tooltip]="tipoCarteira.getDescription(record.tipoCarteira)"></i></h4>
-	<span class="badge"
-		*ngIf="!isInsert"
-		[class]="situacaoCarteira.getStyle(record.situacao)"
-		[tooltip]="record.situacao == 'Inativo' ? 'Não&nbspPermite&nbspLançamento' : ''"
-		tooltipPosition="left">
-			{{situacaoCarteira.getDescription(record.situacao)}}
-	</span>
+		<div class="toolbar">
+			<div style="flex: 1;"><span></span></div>
+			<action-btn [size]="btnNovo.size" [type]="btnNovo.type" [label]="btnNovo.label" [callback]="btnNovo.callback"></action-btn> 
+			<action-btn [size]="btnSalvar.size" [type]="btnSalvar.type" [label]="btnSalvar.label" [observable]="btnSalvar.observable"></action-btn> 
+			<action-btn [size]="btnExcluir.size" [type]="btnExcluir.type" [label]="btnExcluir.label" [observable]="btnExcluir.observable"></action-btn> 
+			<action-btn [size]="btnVoltar.size" [type]="btnVoltar.type" [label]="btnVoltar.label" [callback]="btnVoltar.callback"></action-btn> 
+		</div>
 </div>
 
 <div class="container">
 	<form [formGroup]="form" (keydown.enter)="$event.preventDefault()">
-		<div class="form-group col-3">
+		<div class="form-group col-12">
 			<label class="form-label">Nome</label>
 			<input type="text" formControlName="nome" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nome.errors }" />
 			<div *ngIf="submitted && f.nome.errors" class="invalid-feedback">
@@ -19,21 +19,23 @@
 			</div>
 		</div>
 
-		<div class="form-group col-3">
+		<div class="form-group col-12">
 			<label class="form-label">Tipo</label>
 			<select-input
 				formControlName="tipoCarteira" 
 				[options]="tipoCarteira.getList()" 
+				[canSearch]="false"
 			    optionKey="key"
 			    optionDisplay="value"
 				optionIcon="icon" 
+				[onChangeSubject]="changeSubject"
 				></select-input>
 			<div *ngIf="submitted && f.tipoCarteira.errors" class="invalid-feedback">
 				<div *ngIf="f.tipoCarteira.errors.required">Obrigatório informar tipo de carteira</div>
 			</div>
 		</div>
 		
-		<div class="form-group col-3">
+		<div id="dataForm" class="form-group col-12" [class.hideData]="!showData">
 			<label class="form-label">Data</label>
 			<select-date-input
 			formControlName="data" ></select-date-input>
@@ -42,7 +44,7 @@
 			</div>
 		</div>
 
-		<div class="form-group col-3">
+		<div class="form-group col-12">
 			<label class="form-label">Cor</label>
 			<select-color-input
 				formControlName="cor">
@@ -51,15 +53,12 @@
 				<div *ngIf="f.cor.errors.required">Obrigatório informar cor</div>
 			</div>
 		</div>
-		
-		<div class="form-action">
-			<div class="form-btn">
-				<button [disabled]="loading" class="btn primary" (click)="onSubmit()">
-					<span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
-					Salvar
-				</button>
-				<button class="btn secundary" (click)="goBack()">Cancelar</button>
-			</div>
-		</div>
 	</form>
+
+	<div class="toolbar-mobile">
+		<action-btn [size]="'large'" [type]="btnExcluir.type" [rightIcon]="btnExcluir.rightIcon" [observable]="btnExcluir.observable"></action-btn> 
+		<action-btn [size]="'large'" [type]="btnNovo.type" [rightIcon]="btnNovo.rightIcon" [callback]="btnNovo.callback"></action-btn> 
+		<action-btn [size]="'large'" [type]="btnSalvar.type" [rightIcon]="btnSalvar.rightIcon" [observable]="btnSalvar.observable"></action-btn> 
+		<action-btn [size]="'large'" [type]="btnVoltar.type" [rightIcon]="btnVoltar.rightIcon" [callback]="btnVoltar.callback"></action-btn> 
+	</div>
 </div>
